@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PatchBreakers | Science</title>
+
+  <style>
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #1e293b;
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+      width: 100%;
+      min-height: 75px;
+
+      padding: 0 7%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: #111827;
+
+      position: sticky;
+      top: 0;
+
+      z-index: 1000;
+
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+
+    .logo {
+      color: #00d9ff;
+
+      text-decoration: none;
+
+      font-size: 26px;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      transition: 0.3s ease;
+    }
+
+
+    .logo:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+
+    /* =========================
+       SIDEWAYS NAVIGATION
+    ========================= */
+
+    .nav-menu {
+      list-style: none;
+
+      display: flex;
+      flex-direction: row;
+
+      align-items: center;
+
+      gap: 7px;
+    }
+
+
+    .nav-item {
+      position: relative;
+    }
+
+
+    .nav-link {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      padding: 12px 17px;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
+      border-radius: 8px;
+
+      transition: 0.3s ease;
+    }
+
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #00a8cc;
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+
+    .arrow {
+      font-size: 10px;
+
+      transition: 0.3s ease;
+    }
+
+
+    .has-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+
+    /* =========================
+       DROPDOWN
+    ========================= */
+
+    .dropdown {
+      position: absolute;
+
+      top: calc(100% + 10px);
+      left: 0;
+
+      width: 220px;
+
+      padding: 8px 0;
+
+      list-style: none;
+
+      background: #1e293b;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform:
+        translateY(-15px)
+        scale(0.95);
+
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
+    }
+
+
+    .has-dropdown:hover .dropdown {
+      opacity: 1;
+
+      visibility: visible;
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+
+    .dropdown li a {
+      display: block;
+
+      padding: 13px 18px;
+
+      color: white;
+
+      text-decoration: none;
+
+      transition: 0.25s ease;
+    }
+
+
+    .dropdown li a:hover {
+      background: #00a8cc;
+
+      padding-left: 27px;
+    }
+
+
+    /* =========================
+       HAMBURGER
+    ========================= */
+
+    .hamburger {
+      display: none;
+
+      cursor: pointer;
+    }
+
+
+    .hamburger span {
+      display: block;
+
+      width: 29px;
+      height: 3px;
+
+      margin: 5px;
+
+      background: white;
+
+      border-radius: 5px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 520px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 80px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          #00d9ff,
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #0f172a,
+          #164e63,
+          #1e3a8a
+        );
+
+      overflow: hidden;
+    }
+
+
+    .hero-content {
+      max-width: 900px;
+
+      animation:
+        heroAppear 1s ease;
+    }
+
+
+    @keyframes heroAppear {
+
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    .science-icon {
+      font-size: 75px;
+
+      margin-bottom: 15px;
+
+      animation:
+        float 3s ease-in-out infinite;
+    }
+
+
+    @keyframes float {
+
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+
+    }
+
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 65px);
+
+      margin-bottom: 20px;
+    }
+
+
+    .hero h1 span {
+      color: #00d9ff;
+    }
+
+
+    .hero p {
+      max-width: 800px;
+
+      margin: auto;
+
+      color: #e0f2fe;
+
+      font-size: 18px;
+    }
+
+
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro-section {
+      width: 90%;
+      max-width: 1100px;
+
+      margin: 60px auto;
+    }
+
+
+    .intro-card {
+      background: white;
+
+      padding: 40px;
+
+      border-radius: 20px;
+
+      border-left: 6px solid #00a8cc;
+
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .intro-card h2 {
+      color: #0f172a;
+
+      margin-bottom: 15px;
+
+      font-size: 30px;
+    }
+
+
+    .intro-card p {
+      color: #475569;
+
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .science-section {
+      width: 90%;
+      max-width: 1100px;
+
+      margin: 80px auto;
+    }
+
+
+    .section-heading {
+      text-align: center;
+
+      margin-bottom: 45px;
+    }
+
+
+    .section-heading h2 {
+      color: #0f172a;
+
+      font-size: 38px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .section-heading p {
+      color: #64748b;
+
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       SCIENCE CARDS
+    ========================= */
+
+    .science-card {
+      background: white;
+
+      margin-bottom: 35px;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+
+      border: 1px solid #e2e8f0;
+
+      transition: 0.35s ease;
+    }
+
+
+    .science-card:hover {
+      transform: translateY(-7px);
+
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.14);
+    }
+
+
+    .card-image {
+      width: 100%;
+      height: 260px;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+
+    .card-content {
+      padding: 35px;
+    }
+
+
+    .card-number {
+      display: inline-block;
+
+      padding: 6px 13px;
+
+      margin-bottom: 12px;
+
+      background: #e0f7ff;
+
+      color: #0369a1;
+
+      border-radius: 20px;
+
+      font-weight: bold;
+
+      font-size: 14px;
+    }
+
+
+    .card-content h2 {
+      color: #0f172a;
+
+      font-size: 28px;
+
+      margin-bottom: 15px;
+    }
+
+
+    .factor {
+      display: inline-block;
+
+      margin: 5px 5px 15px 0;
+
+      padding: 7px 13px;
+
+      background: #eff6ff;
+
+      color: #1d4ed8;
+
+      border-radius: 20px;
+
+      font-size: 14px;
+
+      font-weight: bold;
+    }
+
+
+    .card-content h3 {
+      color: #0369a1;
+
+      margin-top: 22px;
+
+      margin-bottom: 8px;
+
+      font-size: 20px;
+    }
+
+
+    .card-content p {
+      color: #475569;
+
+      margin-bottom: 12px;
+    }
+
+
+    .card-content ul {
+      padding-left: 25px;
+
+      color: #475569;
+    }
+
+
+    .card-content li {
+      margin-bottom: 8px;
+    }
+
+
+    /* =========================
+       COLLISION THEORY BOX
+    ========================= */
+
+    .collision-box {
+      margin-top: 20px;
+
+      padding: 22px;
+
+      background: #f0f9ff;
+
+      border-left: 5px solid #0284c7;
+
+      border-radius: 12px;
+    }
+
+
+    .collision-box strong {
+      color: #075985;
+    }
+
+
+    /* =========================
+       APPLICATION BOX
+    ========================= */
+
+    .application-box {
+      margin-top: 20px;
+
+      padding: 22px;
+
+      background: #f8fafc;
+
+      border-radius: 12px;
+
+      border-left: 5px solid #22c55e;
+    }
+
+
+    .application-box strong {
+      color: #166534;
+    }
+
+
+    /* =========================
+       REFERENCES
+    ========================= */
+
+    .references {
+      width: 90%;
+      max-width: 1100px;
+
+      margin: 70px auto;
+
+      padding: 40px;
+
+      background: #0f172a;
+
+      color: white;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .references h2 {
+      color: #00d9ff;
+
+      margin-bottom: 20px;
+    }
+
+
+    .references p {
+      color: #cbd5e1;
+
+      margin-bottom: 14px;
+
+      padding-left: 20px;
+
+      text-indent: -20px;
+    }
+
+
+    .references a {
+      color: #67e8f9;
+
+      word-break: break-word;
+    }
+
+
+    /* =========================
+       SAFETY
+    ========================= */
+
+    .safety {
+      width: 90%;
+      max-width: 900px;
+
+      margin: 60px auto;
+
+      padding: 25px;
+
+      background: #fff3cd;
+
+      border-left: 6px solid #ffc107;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .safety h2 {
+      color: #856404;
+
+      margin-bottom: 10px;
+    }
+
+
+    .safety p {
+      color: #5f5200;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px;
+
+      text-align: center;
+
+      background: #0b1120;
+
+      color: white;
+
+      line-height: 1.8;
+    }
+
+
+    footer span {
+      color: #00d9ff;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .navbar {
+        height: 70px;
+
+        padding: 0 5%;
+      }
+
+
+      .hamburger {
+        display: block;
+      }
+
+
+      .nav-menu {
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 15px 0;
+
+        background: #111827;
+
+        display: none;
+
+        flex-direction: column;
+
+        gap: 5px;
+      }
+
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+
+      .nav-item {
+        width: 100%;
+
+        text-align: center;
+      }
+
+
+      .nav-link {
+        width: 100%;
+
+        justify-content: center;
+      }
+
+
+      .dropdown {
+        position: static;
+
+        width: 90%;
+
+        margin: 5px auto;
+
+        display: none;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+        box-shadow: none;
+      }
+
+
+      .has-dropdown:hover .dropdown {
+        display: block;
+      }
+
+
+      .hero {
+        min-height: 480px;
+      }
+
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+
+      .hero p {
+        font-size: 16px;
+      }
+
+
+      .intro-card {
+        padding: 25px;
+      }
+
+
+      .card-content {
+        padding: 25px 20px;
+      }
+
+
+      .card-image {
+        height: 200px;
+      }
+
+
+      .section-heading h2 {
+        font-size: 30px;
+      }
+
+
+      .references {
+        padding: 25px 20px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      PatchBreakers
+    </a>
+
+
+    <div class="hamburger" id="hamburger">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+
+    <ul class="nav-menu" id="navMenu">
+
+
+      <li class="nav-item">
+
+        <a href="index.html" class="nav-link">
+          Home
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a href="#science" class="nav-link active">
+          Science
+        </a>
+
+      </li>
+
+
+      <li class="nav-item has-dropdown">
+
+        <a href="#" class="nav-link">
+
+          Subjects
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </a>
+
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="aralpan.html">
+              🌏 Aral.pan
+            </a>
+          </li>
+
+          <li>
+            <a href="filipino.html">
+              📚 Filipino
+            </a>
+          </li>
+
+          <li>
+            <a href="MAPEH.html">
+              🎨 MAPEH
+            </a>
+          </li>
+
+          <li>
+            <a href="robotics.html">
+              🤖 Robotics
+            </a>
+          </li>
+
+          <li>
+            <a href="science.html">
+              🔬 Science
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a href="#references" class="nav-link">
+          References
+        </a>
+
+      </li>
+
+
+    </ul>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero" id="science">
+
+    <div class="hero-content">
+
+      <div class="science-icon">
+        🧪
+      </div>
+
+
+      <h1>
+        Applications of
+        <span>Reaction Rates</span>
+      </h1>
+
+
+      <p>
+        Understanding how temperature, concentration,
+        surface area, catalysts, and inhibitors affect
+        chemical reactions in everyday life.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       INTRODUCTION
+  ====================================================== -->
+
+  <section class="intro-section">
+
+    <div class="intro-card">
+
+      <h2>
+        ⚛️ What is Collision Theory?
+      </h2>
+
+
+      <p>
+        Collision theory is a scientific model that explains
+        how chemical reactions occur and why different
+        reactions happen at different speeds. For a reaction
+        to occur, particles must collide with sufficient
+        energy and in an appropriate orientation. Factors
+        that change the frequency or energy of collisions can
+        therefore affect the rate of a chemical reaction.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       APPLICATIONS
+  ====================================================== -->
+
+  <section class="science-section">
+
+    <div class="section-heading">
+
+      <h2>
+        🔬 Applications in Daily Life
+      </h2>
+
+      <p>
+        Five important applications of reaction rates
+        explained through Collision Theory.
+      </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         1. FOOD PRESERVATION
+    ================================================== -->
+
+    <article class="science-card">
+
+      <img
+        class="card-image"
+        src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1200&q=80"
+        alt="Fresh food and food preservation"
+      >
+
+
+      <div class="card-content">
+
+        <span class="card-number">
+          APPLICATION 01
+        </span>
+
+
+        <h2>
+          🥫 Food Preservation
+        </h2>
+
+
+        <div>
+
+          <span class="factor">
+            🌡️ Temperature
+          </span>
+
+          <span class="factor">
+            🧪 Concentration
+          </span>
+
+          <span class="factor">
+            ⚗️ Inhibitors
+          </span>
+
+        </div>
+
+
+        <h3>
+          Scientific Explanation & Collision Theory
+        </h3>
+
+
+        <p>
+          <strong>Temperature:</strong>
+          Refrigeration and freezing lower the temperature,
+          which decreases the average kinetic energy of
+          molecules. This causes particles to move slower,
+          leading to fewer overall collisions and fewer
+          collisions that meet the required activation energy.
+          As a result, cellular respiration in microorganisms
+          and enzymatic decay processes are drastically slowed.
+        </p>
+
+
+        <p>
+          <strong>Concentration:</strong>
+          Techniques like vacuum sealing or using nitrogen
+          flush packaging decrease the concentration of
+          oxygen, reducing the frequency of collisions between
+          oxygen molecules and food lipids, thereby preventing
+          oxidation, which causes rancidity.
+        </p>
+
+
+        <p>
+          Salting or sugaring draws water out of food cells
+          via osmosis, lowering the water available to
+          decay-causing bacteria.
+        </p>
+
+
+        <p>
+          <strong>Inhibitors:</strong>
+          Chemical preservatives such as sodium benzoate and
+          potassium sorbate act as inhibitors that interfere
+          with reaction pathways involved in spoilage,
+          slowing spoilage reactions.
+        </p>
+
+
+        <div class="collision-box">
+
+          <strong>
+            ⚛️ Collision Theory Connection:
+          </strong>
+
+          <p>
+            Lower temperature reduces particle kinetic energy,
+            while reducing oxygen or available water lowers
+            the opportunities for damaging reactions to occur.
+            Preservatives can also interfere with chemical
+            pathways involved in food spoilage.
+          </p>
+
+        </div>
+
+
+        <div class="application-box">
+
+          <strong>
+            🏠 Everyday Applications:
+          </strong>
+
+          <p>
+            Refrigerators, freezers, vacuum-sealed food,
+            salted foods, sugary foods, canned products,
+            and foods containing approved preservatives.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         2. MATERIALS PRODUCTION
+    ================================================== -->
+
+    <article class="science-card">
+
+      <img
+        class="card-image"
+        src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80"
+        alt="Industrial materials production"
+      >
+
+
+      <div class="card-content">
+
+        <span class="card-number">
+          APPLICATION 02
+        </span>
+
+
+        <h2>
+          🏭 Materials Production
+        </h2>
+
+
+        <div>
+
+          <span class="factor">
+            ⚗️ Catalysts
+          </span>
+
+          <span class="factor">
+            🧪 Concentration
+          </span>
+
+          <span class="factor">
+            🌡️ Temperature
+          </span>
+
+        </div>
+
+
+        <h3>
+          Scientific Explanation & Collision Theory
+        </h3>
+
+
+        <p>
+          <strong>Catalysts:</strong>
+          Industrial manufacturing, such as synthesizing
+          plastics, fertilizers, and pharmaceuticals, relies
+          heavily on catalysts. Catalysts provide an
+          alternative reaction pathway with a lower activation
+          energy. This allows a higher fraction of molecular
+          collisions to become successful without requiring
+          extremely high temperatures.
+        </p>
+
+
+        <p>
+          <strong>Concentration:</strong>
+          Increasing reactant concentration places more
+          reactant particles in a given volume, increasing
+          collision frequency.
+        </p>
+
+
+        <p>
+          <strong>Temperature:</strong>
+          Optimizing temperature gives reactant particles
+          sufficient kinetic energy to overcome the activation
+          energy barrier and produce products more efficiently.
+        </p>
+
+
+        <div class="collision-box">
+
+          <strong>
+            ⚛️ Collision Theory Connection:
+          </strong>
+
+          <p>
+            More concentrated reactants collide more often,
+            while increased temperature increases particle
+            kinetic energy. Catalysts lower the activation
+            energy needed for successful collisions.
+          </p>
+
+        </div>
+
+
+        <div class="application-box">
+
+          <strong>
+            🏠 Everyday Applications:
+          </strong>
+
+          <p>
+            Production of plastics, fertilizers,
+            pharmaceuticals, steel, and other manufactured
+            materials.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         3. FIRE CONTROL
+    ================================================== -->
+
+    <article class="science-card">
+
+      <img
+        class="card-image"
+        src="https://images.unsplash.com/photo-1517667200002-7e3e5b8d7a2e?auto=format&fit=crop&w=1200&q=80"
+        alt="Fire and fire control"
+      >
+
+
+      <div class="card-content">
+
+        <span class="card-number">
+          APPLICATION 03
+        </span>
+
+
+        <h2>
+          🔥 Fire Control
+        </h2>
+
+
+        <div>
+
+          <span class="factor">
+            🫧 Concentration
+          </span>
+
+          <span class="factor">
+            🌡️ Temperature
+          </span>
+
+          <span class="factor">
+            🔥 Surface Area
+          </span>
+
+        </div>
+
+
+        <h3>
+          Scientific Explanation & Collision Theory
+        </h3>
+
+
+        <p>
+          <strong>Concentration:</strong>
+          Fire extinguishers using carbon dioxide or chemical
+          foam displace surrounding air, lowering the
+          concentration of oxygen. Without sufficient oxygen
+          particles available to react with fuel, combustion
+          can stop.
+        </p>
+
+
+        <p>
+          <strong>Temperature:</strong>
+          Water absorbs thermal energy because of its high
+          specific heat capacity. This lowers the temperature
+          of burning material below its ignition point,
+          reducing the kinetic energy of particles and
+          slowing the combustion reaction.
+        </p>
+
+
+        <p>
+          <strong>Surface Area:</strong>
+          Fine fuels such as dry leaves, brush, and sawdust
+          have a large surface-area-to-volume ratio. This
+          exposes more material to oxygen and can increase
+          combustion. Removing these materials can limit
+          rapid fire growth.
+        </p>
+
+
+        <div class="collision-box">
+
+          <strong>
+            ⚛️ Collision Theory Connection:
+          </strong>
+
+          <p>
+            Combustion requires fuel and oxygen particles to
+            collide with enough energy. Removing oxygen,
+            lowering temperature, or reducing exposed fuel
+            can decrease successful collisions.
+          </p>
+
+        </div>
+
+
+        <div class="application-box">
+
+          <strong>
+            🏠 Everyday Applications:
+          </strong>
+
+          <p>
+            Fire extinguishers, water used by firefighters,
+            firebreaks, and removal of dry vegetation around
+            wildfire-prone areas.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         4. POLLUTION PREVENTION
+    ================================================== -->
+
+    <article class="science-card">
+
+      <img
+        class="card-image"
+        src="https://images.unsplash.com/photo-1530533718754-001d2668365a?auto=format&fit=crop&w=1200&q=80"
+        alt="Industrial pollution and pollution control"
+      >
+
+
+      <div class="card-content">
+
+        <span class="card-number">
+          APPLICATION 04
+        </span>
+
+
+        <h2>
+          🌎 Pollution Prevention
+        </h2>
+
+
+        <div>
+
+          <span class="factor">
+            ⚗️ Catalysts
+          </span>
+
+          <span class="factor">
+            🧪 Concentration
+          </span>
+
+        </div>
+
+
+        <h3>
+          Scientific Explanation & Collision Theory
+        </h3>
+
+
+        <p>
+          <strong>Catalysts:</strong>
+          Modern automobiles use catalytic converters
+          containing catalysts such as platinum, palladium,
+          and rhodium. These catalysts help convert harmful
+          exhaust substances, including carbon monoxide and
+          unburned hydrocarbons, into less harmful products.
+        </p>
+
+
+        <p>
+          <strong>Concentration:</strong>
+          Industrial power plants can use wet scrubbers
+          containing basic solutions to react with acidic
+          sulfur dioxide gas. Increasing contact between the
+          neutralizing material and pollutant molecules can
+          promote the desired reactions.
+        </p>
+
+
+        <div class="collision-box">
+
+          <strong>
+            ⚛️ Collision Theory Connection:
+          </strong>
+
+          <p>
+            Catalysts make successful reactions easier by
+            providing a pathway with lower activation energy.
+            Increasing contact or concentration can also
+            increase the frequency of collisions between
+            reactant particles.
+          </p>
+
+        </div>
+
+
+        <div class="application-box">
+
+          <strong>
+            🏠 Everyday Applications:
+          </strong>
+
+          <p>
+            Vehicle catalytic converters and industrial
+            pollution-control systems help reduce harmful
+            substances released into the environment.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         5. CORROSION
+    ================================================== -->
+
+    <article class="science-card">
+
+      <img
+        class="card-image"
+        src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80"
+        alt="Metal corrosion and rust"
+      >
+
+
+      <div class="card-content">
+
+        <span class="card-number">
+          APPLICATION 05
+        </span>
+
+
+        <h2>
+          🔩 Corrosion
+        </h2>
+
+
+        <div>
+
+          <span class="factor">
+            🧪 Concentration
+          </span>
+
+          <span class="factor">
+            🔥 Surface Area
+          </span>
+
+          <span class="factor">
+            ⚗️ Inhibitors
+          </span>
+
+        </div>
+
+
+        <h3>
+          Scientific Explanation & Collision Theory
+        </h3>
+
+
+        <p>
+          <strong>Concentration & Protective Barriers:</strong>
+          Rusting of iron requires contact with oxygen and
+          moisture. Painting, oiling, or galvanizing iron
+          with zinc creates a protective barrier that reduces
+          direct contact between the metal and its environment.
+        </p>
+
+
+        <p>
+          <strong>Surface Area:</strong>
+          Smooth, polished metals generally have less exposed
+          surface area than rough or finely divided materials,
+          reducing the area available for reactions.
+        </p>
+
+
+        <p>
+          <strong>Corrosion Inhibitors:</strong>
+          Coolants and industrial fluid systems can contain
+          corrosion inhibitors. These compounds can form
+          protective films on metal surfaces and slow
+          oxidation-related processes.
+        </p>
+
+
+        <div class="collision-box">
+
+          <strong>
+            ⚛️ Collision Theory Connection:
+          </strong>
+
+          <p>
+            Protective coatings reduce direct contact between
+            reactants and the metal. Reducing exposed surface
+            area decreases the number of locations where
+            reactions can occur, while inhibitors interfere
+            with corrosion processes.
+          </p>
+
+        </div>
+
+
+        <div class="application-box">
+
+          <strong>
+            🏠 Everyday Applications:
+          </strong>
+
+          <p>
+            Painting metal gates, oiling machinery,
+            galvanizing steel, polishing metals, and using
+            corrosion-inhibiting substances in industrial
+            systems.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       KEY TAKEAWAY
+  ====================================================== -->
+
+  <section class="intro-section">
+
+    <div class="intro-card">
+
+      <h2>
+        🧠 Key Takeaway
+      </h2>
+
+
+      <p>
+        The rate of a chemical reaction can be influenced by
+        factors such as temperature, concentration, surface
+        area, catalysts, and inhibitors. Collision Theory helps
+        explain these effects by focusing on how often
+        particles collide, how much energy they have, and
+        whether their collisions are successful.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       REFERENCES
+  ====================================================== -->
+
+  <section class="references" id="references">
+
+    <h2>
+      📚 References
+    </h2>
+
+
+    <p>
+      Department of Education. (2021).
+      <em>
+        Science 10 Quarter 4 Module 8: Factors affecting
+        the rate of chemical reaction in food preservation,
+        materials production, control of fire, pollution
+        and corrosion
+      </em>
+      (1st ed.). DepEd Region III – Schools Division
+      of Bulacan.
+    </p>
+
+
+    <p>
+      Department of Education. (2022).
+      <em>
+        Factors affecting chemical reaction rate
+      </em>
+      (Learning Resource No. 22397).
+      Learning Resource Management and Development
+      System (LRMDS).
+      <br>
+
+      <a
+        href="https://lrmds.deped.gov.ph/detail/22397"
+        target="_blank"
+      >
+        https://lrmds.deped.gov.ph/detail/22397
+      </a>
+    </p>
+
+
+    <p>
+      Masterton, W. L., & Hurley, C. N. (2015).
+      <em>
+        Chemistry: Principles and Reactions
+      </em>
+      (8th ed.). Cengage Learning.
+    </p>
+
+
+    <p>
+      Zumdahl, S. S., & Zumdahl, S. A. (2020).
+      <em>
+        Chemistry
+      </em>
+      (10th ed.). Cengage Learning.
+    </p>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       SAFETY REMINDER
+  ====================================================== -->
+
+  <div class="safety">
+
+    <h2>
+      ⚠️ Safety Reminder
+    </h2>
+
+
+    <p>
+      Always prioritize safety when working with chemicals,
+      fire, laboratory equipment, and other science
+      materials. Use the correct equipment, follow
+      instructions, and ask the teacher or person in charge
+      for assistance when you are unsure about a task.
+    </p>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <p>
+      © 2026 <span>PatchBreakers</span>
+    </p>
+
+    <p>
+      🔬 Learn • Explore • Create • Innovate 🚀
+    </p>
+
+  </footer>
+
+
+
+
+  <script>
+
+    const hamburger =
+      document.getElementById("hamburger");
+
+    const navMenu =
+      document.getElementById("navMenu");
+
+
+    hamburger.addEventListener(
+      "click",
+      function () {
+
+        navMenu.classList.toggle("show");
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>

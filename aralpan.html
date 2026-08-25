@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PatchBreakers | Araling Panlipunan</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+      width: 100%;
+      height: 75px;
+      padding: 0 7%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: #111827;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo {
+      color: #00d9ff;
+      text-decoration: none;
+      font-size: 26px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .logo:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 5px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 12px 16px;
+
+      color: white;
+      text-decoration: none;
+
+      border-radius: 8px;
+
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #00a8cc;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ================= DROPDOWN ================= */
+
+    .dropdown {
+      position: absolute;
+
+      top: calc(100% + 10px);
+      left: 0;
+
+      width: 210px;
+
+      padding: 8px 0;
+
+      list-style: none;
+
+      background: #1e293b;
+
+      border-radius: 12px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(-15px) scale(0.95);
+
+      transition: 0.3s ease;
+
+      z-index: 1100;
+    }
+
+    .has-dropdown:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown li {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+
+    .has-dropdown:hover .dropdown li {
+      animation: dropdownItem 0.35s ease forwards;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(2) {
+      animation-delay: 0.10s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(4) {
+      animation-delay: 0.20s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    @keyframes dropdownItem {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .dropdown li a {
+      display: block;
+
+      padding: 13px 18px;
+
+      color: white;
+      text-decoration: none;
+
+      transition: 0.25s ease;
+    }
+
+    .dropdown li a:hover {
+      background: #00a8cc;
+      padding-left: 27px;
+    }
+
+    .arrow {
+      font-size: 10px;
+      transition: 0.3s ease;
+    }
+
+    .has-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* ================= HAMBURGER ================= */
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+
+      width: 28px;
+      height: 3px;
+
+      margin: 5px;
+
+      background: white;
+      border-radius: 5px;
+    }
+
+    /* ================= HERO ================= */
+
+    .environment-hero {
+      min-height: 430px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 60px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          #00a8cc,
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #111827,
+          #243b55
+        );
+    }
+
+    .environment-hero-content {
+      max-width: 900px;
+    }
+
+    .subject-label {
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      color: #00d9ff;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      letter-spacing: 3px;
+    }
+
+    .environment-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+
+    .environment-hero p {
+      max-width: 800px;
+      margin: auto;
+
+      color: #e5e7eb;
+
+      font-size: 1.1rem;
+    }
+
+    /* ================= MAIN ================= */
+
+    .action-plan {
+      width: 90%;
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 2.7rem;
+      color: #111827;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #64748b;
+    }
+
+    /* ================= DESCRIPTION ================= */
+
+    .description-card {
+      background: white;
+
+      padding: 30px;
+
+      margin-bottom: 40px;
+
+      border-radius: 18px;
+
+      border-left: 6px solid #00a8cc;
+
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .description-card h3 {
+      color: #111827;
+      margin-bottom: 12px;
+      font-size: 1.5rem;
+    }
+
+    .description-card p {
+      color: #4b5563;
+    }
+
+    /* ================= TABLE ================= */
+
+    .table-container {
+      width: 100%;
+
+      overflow-x: auto;
+
+      background: white;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.10);
+    }
+
+    .action-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 900px;
+    }
+
+    .action-table th {
+      background: #111827;
+
+      color: white;
+
+      padding: 18px 15px;
+
+      text-align: center;
+
+      font-size: 15px;
+    }
+
+    .action-table td {
+      padding: 22px 18px;
+
+      border-bottom: 1px solid #e5e7eb;
+
+      vertical-align: top;
+
+      color: #4b5563;
+    }
+
+    .action-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .action-table tbody tr {
+      transition: 0.3s ease;
+    }
+
+    .action-table tbody tr:hover {
+      background: #eef6ff;
+      transform: scale(1.005);
+    }
+
+    .number {
+      width: 70px;
+
+      text-align: center;
+
+      font-weight: bold;
+
+      color: #2563eb;
+
+      font-size: 18px;
+    }
+
+    .action-title {
+      color: #111827;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      margin-bottom: 5px;
+    }
+
+    .action-subtitle {
+      color: #2563eb;
+
+      font-size: 13px;
+
+      font-weight: bold;
+    }
+
+    .table-list {
+      padding-left: 20px;
+    }
+
+    .table-list li {
+      margin-bottom: 8px;
+    }
+
+    .time-frame {
+      display: inline-block;
+
+      padding: 8px 12px;
+
+      border-radius: 8px;
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      font-size: 13px;
+
+      font-weight: bold;
+    }
+
+    .citation {
+      color: #2563eb;
+
+      font-weight: bold;
+
+      text-decoration: none;
+    }
+
+    .citation:hover {
+      text-decoration: underline;
+    }
+
+    /* ================= REFERENCES ================= */
+
+    .references {
+      width: 90%;
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 20px 0 80px;
+    }
+
+    .references h2 {
+      text-align: center;
+
+      font-size: 2.5rem;
+
+      color: #111827;
+
+      margin-bottom: 30px;
+    }
+
+    .reference-card {
+      background: white;
+
+      padding: 25px;
+
+      margin-bottom: 20px;
+
+      border-left: 5px solid #00a8cc;
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .reference-card p {
+      color: #4b5563;
+
+      margin-bottom: 10px;
+    }
+
+    .reference-card a {
+      color: #2563eb;
+
+      text-decoration: none;
+
+      font-weight: 600;
+    }
+
+    .reference-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ================= CONTACT ================= */
+
+    .contact {
+      padding: 70px 20px;
+
+      text-align: center;
+
+      background: #111827;
+
+      color: white;
+    }
+
+    .contact h2 {
+      font-size: 2.3rem;
+
+      margin-bottom: 10px;
+    }
+
+    .contact p {
+      color: #cbd5e1;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+
+      .navbar {
+        height: 70px;
+        padding: 0 5%;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 15px 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        background: #111827;
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-link {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .dropdown {
+        position: static;
+
+        width: 90%;
+
+        margin: 5px auto;
+
+        display: none;
+
+        opacity: 1;
+        visibility: visible;
+
+        transform: none;
+
+        box-shadow: none;
+      }
+
+      .has-dropdown:hover .dropdown {
+        display: block;
+      }
+
+      .dropdown li {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+      }
+
+      .environment-hero {
+        min-height: 380px;
+      }
+
+      .action-plan {
+        width: 92%;
+        padding: 60px 0;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .description-card {
+        padding: 22px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      PatchBreakers
+    </a>
+
+
+    <div class="hamburger" id="hamburger">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+
+    <ul class="nav-menu" id="navMenu">
+
+      <li class="nav-item">
+
+        <a href="index.html" class="nav-link">
+          Home
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a href="#action-plan" class="nav-link active">
+          About
+        </a>
+
+      </li>
+
+
+      <li class="nav-item has-dropdown">
+
+        <a href="#" class="nav-link">
+
+          Subjects
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </a>
+
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="aralpan.html">
+              🌏 Aral.pan
+            </a>
+          </li>
+
+          <li>
+            <a href="filipino.html">
+              📚 Filipino
+            </a>
+          </li>
+
+          <li>
+            <a href="MAPEH.html">
+              🎨 MAPEH
+            </a>
+          </li>
+
+          <li>
+            <a href="robotics.html">
+              🤖 Robotics
+            </a>
+          </li>
+
+          <li>
+            <a href="science.html">
+              🔬 Science
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a href="#contact" class="nav-link">
+          Contact
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="environment-hero">
+
+    <div class="environment-hero-content">
+
+      <span class="subject-label">
+        🌏 ARALING PANLIPUNAN & VALUES EDUCATION
+      </span>
+
+
+      <h1>
+        Personal Environmental Action Plan
+      </h1>
+
+
+      <p>
+        “Bumuo ng personal na action plan sa pagtugon
+        sa mga isyung pangkalikasan tungo sa
+        sustenabling pag-unlad.”
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= ACTION PLAN ================= -->
+
+  <main class="action-plan" id="action-plan">
+
+
+    <div class="section-title">
+
+      <h2>
+        Aking Personal na Action Plan
+      </h2>
+
+      <p>
+        Mga konkretong hakbang para sa pangangalaga
+        ng kapaligiran at pagsusulong ng
+        sustenabling pag-unlad.
+      </p>
+
+    </div>
+
+
+    <!-- ================= DESCRIPTION ================= -->
+
+    <div class="description-card">
+
+      <h3>
+        📖 Description
+      </h3>
+
+      <p>
+        Ang Araling Panlipunan ay tumutulong sa mga
+        mag-aaral na maunawaan ang ugnayan ng tao,
+        lipunan, kultura, kapaligiran, at pamahalaan.
+        Sa gawaing ito, inilalahad ang mga personal na
+        hakbang na maaaring gawin upang makatulong sa
+        pangangalaga ng kalikasan at makamit ang
+        sustenabling pag-unlad.
+      </p>
+
+    </div>
+
+
+    <!-- ================= TABLE ================= -->
+
+    <div class="table-container">
+
+      <table class="action-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              #
+            </th>
+
+            <th>
+              Action Plan
+            </th>
+
+            <th>
+              Action Taken
+            </th>
+
+            <th>
+              Target Outcome
+            </th>
+
+            <th>
+              Time Frame
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <!-- 01 -->
+
+          <tr>
+
+            <td class="number">
+              01
+            </td>
+
+
+            <td>
+
+              <div class="action-title">
+                Waste Reduction
+              </div>
+
+              <div class="action-subtitle">
+                Reduce, Reuse & Recycle
+              </div>
+
+            </td>
+
+
+            <td>
+
+              Isagawa ang 3 R's
+              (reduce, reuse, at recycle)
+              at magdala ng mga bote at bag
+              na maaaring gamitin muli.
+              <a class="citation" href="#ref1">
+                [1]
+              </a>
+
+            </td>
+
+
+            <td>
+
+              Pagbabawas ng solidong basura
+              sa tahanan at paaralan,
+              pagkatutong pangalagaan ang
+              ating kapaligiran, at pagtataglay
+              ng disiplina.
+
+              <br><br>
+
+              Ang pagbabawas, reuse, at recycling
+              ay kabilang sa mga hakbang na
+              itinataguyod sa sustainable
+              consumption.
+
+              <a class="citation" href="#ref1">
+                [1]
+              </a>
+
+            </td>
+
+
+            <td>
+
+              <span class="time-frame">
+                Daily / Ongoing
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- 02 -->
+
+          <tr>
+
+            <td class="number">
+              02
+            </td>
+
+
+            <td>
+
+              <div class="action-title">
+                Sustainable na Pagkonsumo
+              </div>
+
+              <div class="action-subtitle">
+                Sustainable Living
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <ul class="table-list">
+
+                <li>
+                  Magdala ng mga reusable na bag,
+                  bote, at kubyertos araw-araw.
+                </li>
+
+                <li>
+                  Magplano at gumastos nang matalino
+                  para sa mga pagkain upang
+                  maiwasan ang basura.
+                </li>
+
+              </ul>
+
+            </td>
+
+
+            <td>
+
+              Binabawasan nito ang paggamit
+              ng resources at pagbuo ng basura,
+              na umaayon sa konsepto ng
+              sustainable consumption and
+              production.
+
+              <a class="citation" href="#ref2">
+                [2]
+              </a>
+
+            </td>
+
+
+            <td>
+
+              <span class="time-frame">
+                Weekly
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- 03 -->
+
+          <tr>
+
+            <td class="number">
+              03
+            </td>
+
+
+            <td>
+
+              <div class="action-title">
+                Pakikilahok sa mga
+                Proyektong Pangkalikasan
+              </div>
+
+              <div class="action-subtitle">
+                Active Participation
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <ul class="table-list">
+
+                <li>
+                  Sumali o mag-organisa ng lokal
+                  na clean-up drive o aktibidad
+                  sa pagtatanim ng puno.
+                </li>
+
+                <li>
+                  Magkaroon ng hilig sa pagtatanim
+                  o mag-alaga ng maliit na hardin.
+                </li>
+
+              </ul>
+
+            </td>
+
+
+            <td>
+
+              Nagbibigay ng direktang ambag
+              sa pangangalaga ng kapaligiran,
+              biodiversity, at lokal na komunidad.
+
+              <br><br>
+
+              Ang pakikilahok ng mga mamamayan
+              ay mahalaga sa pagkamit ng mga
+              Sustainable Development Goals.
+
+              <a class="citation" href="#ref3">
+                [3]
+              </a>
+
+            </td>
+
+
+            <td>
+
+              <span class="time-frame">
+                Monthly / Quarterly
+              </span>
+
+            </td>
+
+          </tr>
+
+
+          <!-- 04 -->
+
+          <tr>
+
+            <td class="number">
+              04
+            </td>
+
+
+            <td>
+
+              <div class="action-title">
+                Pangangalaga sa Likas na Yaman
+              </div>
+
+              <div class="action-subtitle">
+                Resource Conservation
+              </div>
+
+            </td>
+
+
+            <td>
+
+              <ul class="table-list">
+
+                <li>
+                  Pagsasagawa ng paghihiwalay
+                  ng basura sa paaralan at tahanan.
+                </li>
+
+                <li>
+                  Patayin ang mga elektronikong
+                  kagamitan at gripo ng tubig
+                  na hindi ginagamit.
+                </li>
+
+              </ul>
+
+            </td>
+
+
+            <td>
+
+              Nabawasan ang basura sa tahanan
+              at paaralan, at pagkatutong maging
+              disiplinado at masigasig sa
+              pangangalaga sa kapaligiran.
+
+              <br><br>
+
+              Ang mahusay at sustainable na
+              paggamit ng resources ay bahagi
+              ng SDG 12.
+
+              <a class="citation" href="#ref1">
+                [1]
+              </a>
+
+            </td>
+
+
+            <td>
+
+              <span class="time-frame">
+                Daily / Ongoing
+              </span>
+
+            </td>
+
+          </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </main>
+
+
+  <!-- ================= REFERENCES ================= -->
+
+  <section class="references" id="references">
+
+    <h2>
+      References
+    </h2>
+
+
+    <div class="reference-card" id="ref1">
+
+      <p>
+        <strong>
+          [1] United Nations — Sustainable
+          Consumption and Production
+        </strong>
+      </p>
+
+      <p>
+        The United Nations explains that SDG 12
+        promotes sustainable consumption and
+        production and includes targets for
+        waste prevention, reduction, recycling,
+        and reuse.
+      </p>
+
+      <a
+        href="https://www.un.org/sustainabledevelopment/sustainable-consumption-production/"
+        target="_blank">
+
+        United Nations — Goal 12
+
+      </a>
+
+    </div>
+
+
+    <div class="reference-card" id="ref2">
+
+      <p>
+        <strong>
+          [2] United Nations Environment
+          Programme (UNEP)
+        </strong>
+      </p>
+
+      <p>
+        UNEP describes sustainable consumption
+        and production as using resources more
+        efficiently while reducing environmental
+        degradation, waste, and pollution.
+      </p>
+
+      <a
+        href="https://www.unep.org/explore-topics/resource-efficiency/what-we-do/policy-and-strategy/sustainable-consumption-and-production-policies"
+        target="_blank">
+
+        UNEP — Sustainable Consumption
+        and Production
+
+      </a>
+
+    </div>
+
+
+    <div class="reference-card" id="ref3">
+
+      <p>
+        <strong>
+          [3] United Nations — Sustainable
+          Development Goals
+        </strong>
+      </p>
+
+      <p>
+        The United Nations Sustainable
+        Development Goals provide a global
+        framework for protecting the planet,
+        supporting communities, and promoting
+        sustainable development.
+      </p>
+
+      <a
+        href="https://www.un.org/sustainabledevelopment/development-goals/"
+        target="_blank">
+
+        United Nations — Sustainable
+        Development Goals
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CONTACT ================= -->
+
+  <section class="contact" id="contact">
+
+    <h2>
+      PatchBreakers
+    </h2>
+
+    <p>
+      Working together for a cleaner, greener,
+      and more sustainable future. 🌏
+    </p>
+
+  </section>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    const hamburger =
+      document.getElementById("hamburger");
+
+    const navMenu =
+      document.getElementById("navMenu");
+
+
+    hamburger.addEventListener("click", function () {
+
+      navMenu.classList.toggle("show");
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>

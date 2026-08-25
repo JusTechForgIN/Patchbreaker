@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="tl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PatchBreakers | El Filibusterismo</title>
+
+  <style>
+
+    /* =========================
+       GENERAL DESIGN
+    ========================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+      width: 100%;
+      height: 75px;
+      padding: 0 7%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: #111827;
+
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      color: #00d9ff;
+      text-decoration: none;
+
+      font-size: 26px;
+      font-weight: bold;
+
+      transition: 0.3s ease;
+    }
+
+    .logo:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+
+      list-style: none;
+      gap: 5px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 12px 16px;
+
+      color: white;
+      text-decoration: none;
+
+      border-radius: 8px;
+
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #00a8cc;
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       DROPDOWN
+    ========================= */
+
+    .dropdown {
+      position: absolute;
+
+      top: calc(100% + 10px);
+      left: 0;
+
+      width: 210px;
+
+      padding: 8px 0;
+
+      list-style: none;
+
+      background: #1e293b;
+
+      border-radius: 12px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(-15px) scale(0.95);
+
+      transition: 0.3s ease;
+
+      z-index: 1100;
+    }
+
+    .has-dropdown:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown li a {
+      display: block;
+
+      padding: 13px 18px;
+
+      color: white;
+      text-decoration: none;
+
+      transition: 0.25s ease;
+    }
+
+    .dropdown li a:hover {
+      background: #00a8cc;
+      padding-left: 27px;
+    }
+
+    .arrow {
+      font-size: 10px;
+
+      transition: 0.3s ease;
+    }
+
+    .has-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+
+    /* =========================
+       HAMBURGER
+    ========================= */
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+
+      width: 28px;
+      height: 3px;
+
+      margin: 5px;
+
+      background: white;
+
+      border-radius: 5px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 600px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 80px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          #00a8cc,
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #111827,
+          #243b55
+        );
+    }
+
+    .hero-content {
+      max-width: 950px;
+
+      animation: appear 1s ease;
+    }
+
+    @keyframes appear {
+
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    .hero h1 {
+      font-size: 55px;
+
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #00d9ff;
+    }
+
+    .hero p {
+      font-size: 19px;
+
+      line-height: 1.8;
+
+      color: #e5e7eb;
+
+      margin-bottom: 15px;
+    }
+
+    .hero-button {
+      display: inline-block;
+
+      margin-top: 25px;
+
+      padding: 15px 32px;
+
+      background: #00d9ff;
+
+      color: #111827;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      border-radius: 30px;
+
+      transition: 0.3s ease;
+    }
+
+    .hero-button:hover {
+      background: white;
+
+      transform:
+        translateY(-5px)
+        scale(1.05);
+    }
+
+
+    /* =========================
+       INTRODUCTION
+    ========================= */
+
+    .section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+
+      font-size: 38px;
+
+      color: #111827;
+
+      margin-bottom: 15px;
+    }
+
+    .section-description {
+      text-align: center;
+
+      color: #64748b;
+
+      font-size: 17px;
+
+      line-height: 1.7;
+
+      max-width: 850px;
+
+      margin: 0 auto 45px;
+    }
+
+    .intro-box {
+      max-width: 1000px;
+
+      margin: auto;
+
+      padding: 35px;
+
+      background: white;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.10);
+
+      border-left: 6px solid #00a8cc;
+    }
+
+    .intro-box p {
+      line-height: 1.9;
+
+      color: #475569;
+
+      font-size: 17px;
+
+      margin-bottom: 15px;
+    }
+
+
+    /* =========================
+       ISSUE CHART
+    ========================= */
+
+    .issues-section {
+      background: #eef6ff;
+    }
+
+    .issues-container {
+      max-width: 1100px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(300px, 1fr));
+
+      gap: 25px;
+    }
+
+    .issue-card {
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      box-shadow:
+        0 7px 22px rgba(0,0,0,0.10);
+
+      border-top: 5px solid #00a8cc;
+
+      transition: 0.35s ease;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .issue-card:hover {
+      transform:
+        translateY(-10px)
+        scale(1.02);
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .issue-number {
+      position: absolute;
+
+      right: 20px;
+      top: 15px;
+
+      font-size: 45px;
+
+      font-weight: bold;
+
+      color: #e2e8f0;
+    }
+
+    .issue-icon {
+      font-size: 50px;
+
+      margin-bottom: 15px;
+    }
+
+    .issue-card h3 {
+      color: #111827;
+
+      font-size: 23px;
+
+      margin-bottom: 15px;
+    }
+
+    .issue-card p {
+      color: #64748b;
+
+      line-height: 1.8;
+
+      text-align: left;
+
+      margin-bottom: 15px;
+    }
+
+    .issue-example {
+      background: #eef6ff;
+
+      padding: 15px;
+
+      border-radius: 12px;
+
+      color: #334155;
+
+      line-height: 1.7;
+
+      text-align: left;
+    }
+
+    .issue-example strong {
+      color: #00a8cc;
+    }
+
+
+    /* =========================
+       VISUAL CHART
+    ========================= */
+
+    .chart-box {
+      max-width: 1000px;
+
+      margin: 50px auto 0;
+
+      background: white;
+
+      padding: 35px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 7px 25px rgba(0,0,0,0.10);
+    }
+
+    .chart-title {
+      text-align: center;
+
+      font-size: 25px;
+
+      color: #111827;
+
+      margin-bottom: 30px;
+    }
+
+    .bar {
+      margin-bottom: 25px;
+    }
+
+    .bar-label {
+      display: flex;
+
+      justify-content: space-between;
+
+      margin-bottom: 8px;
+
+      font-weight: bold;
+
+      color: #334155;
+    }
+
+    .bar-background {
+      width: 100%;
+
+      height: 18px;
+
+      background: #e2e8f0;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00a8cc,
+          #00d9ff
+        );
+
+      border-radius: 20px;
+
+      animation: growBar 1.5s ease;
+    }
+
+    @keyframes growBar {
+
+      from {
+        width: 0;
+      }
+
+    }
+
+    .bar1 {
+      width: 95%;
+    }
+
+    .bar2 {
+      width: 90%;
+    }
+
+    .bar3 {
+      width: 85%;
+    }
+
+    .bar4 {
+      width: 80%;
+    }
+
+    .bar5 {
+      width: 75%;
+    }
+
+
+    /* =========================
+       KAHALAGAHAN
+    ========================= */
+
+    .importance {
+      max-width: 1000px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+      gap: 25px;
+    }
+
+    .importance-card {
+      background: #111827;
+
+      color: white;
+
+      padding: 30px;
+
+      border-radius: 18px;
+
+      text-align: center;
+
+      transition: 0.3s ease;
+    }
+
+    .importance-card:hover {
+      transform: translateY(-8px);
+
+      background: #243b55;
+    }
+
+    .importance-card .icon {
+      font-size: 45px;
+
+      margin-bottom: 15px;
+    }
+
+    .importance-card h3 {
+      color: #00d9ff;
+
+      margin-bottom: 12px;
+    }
+
+    .importance-card p {
+      line-height: 1.7;
+
+      color: #e5e7eb;
+    }
+
+
+    /* =========================
+       CITATIONS
+    ========================= */
+
+    .references {
+      max-width: 1000px;
+
+      margin: 50px auto;
+
+      padding: 30px;
+
+      background: white;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .references h2 {
+      color: #111827;
+
+      margin-bottom: 20px;
+    }
+
+    .references p {
+      color: #475569;
+
+      line-height: 1.8;
+
+      margin-bottom: 12px;
+    }
+
+    .references a {
+      color: #008bb0;
+
+      word-break: break-word;
+    }
+
+
+    /* =========================
+       SAFETY / REMINDER
+    ========================= */
+
+    .reminder {
+      max-width: 1000px;
+
+      margin: 50px auto;
+
+      padding: 25px;
+
+      background: #fff3cd;
+
+      border-left: 6px solid #ffc107;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .reminder h2 {
+      color: #856404;
+
+      margin-bottom: 10px;
+    }
+
+    .reminder p {
+      color: #5f5200;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 30px;
+
+      text-align: center;
+
+      background: #0b1120;
+
+      color: white;
+
+      line-height: 1.8;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .navbar {
+        height: 70px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 15px 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        background: #111827;
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-item {
+        width: 100%;
+
+        text-align: center;
+      }
+
+      .nav-link {
+        justify-content: center;
+
+        width: 100%;
+      }
+
+      .dropdown {
+        position: static;
+
+        width: 90%;
+
+        margin: 5px auto;
+
+        display: none;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+        box-shadow: none;
+      }
+
+      .has-dropdown:hover .dropdown {
+        display: block;
+      }
+
+      .hero {
+        min-height: 550px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .issues-container {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       NAVBAR
+  ========================= -->
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      PatchBreakers
+    </a>
+
+    <div class="hamburger" id="hamburger">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+    <ul class="nav-menu" id="navMenu">
+
+      <li class="nav-item">
+        <a href="#home" class="nav-link active">
+          Home
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#issues" class="nav-link">
+          Mga Isyu
+        </a>
+      </li>
+
+      <li class="nav-item has-dropdown">
+
+        <a href="#" class="nav-link">
+          Subjects
+          <span class="arrow">▼</span>
+        </a>
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="aralpan.html">
+              🌏 Aral.pan
+            </a>
+          </li>
+
+          <li>
+            <a href="filipino.html">
+              📚 Filipino
+            </a>
+          </li>
+
+          <li>
+            <a href="MAPEH.html">
+              🎨 MAPEH
+            </a>
+          </li>
+
+          <li>
+            <a href="robotics.html">
+              🤖 Robotics
+            </a>
+          </li>
+
+          <li>
+            <a href="science.html">
+              🔬 Science
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a href="#references" class="nav-link">
+          Sanggunian
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h1>
+        Mga Isyu sa
+        <span>El Filibusterismo</span> 📖
+      </h1>
+
+      <p>
+        Isang pagsusuri sa mga suliraning panlipunan,
+        pampolitika, at pang-edukasyon na inilantad
+        ni Dr. José Rizal sa kanyang nobela.
+      </p>
+
+      <p>
+        Tuklasin kung paano ipinakita sa akda ang
+        pang-aabuso sa kapangyarihan, katiwalian,
+        kawalan ng katarungan, at mga suliranin sa edukasyon.
+      </p>
+
+      <a href="#issues" class="hero-button">
+        Tuklasin ang mga Isyu 📚
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       PANIMULA
+  ========================= -->
+
+  <section class="section">
+
+    <h2 class="section-title">
+      📖 Tungkol sa El Filibusterismo
+    </h2>
+
+    <p class="section-description">
+      Ang <i>El Filibusterismo</i> ay isang nobelang pampolitika
+      ni Jose Rizal na tumatalakay sa kalagayan ng lipunang
+      Pilipino sa ilalim ng kolonyal na pamahalaan ng Espanya.
+    </p>
+
+    <div class="intro-box">
+
+      <p>
+        Sa nobela, inilantad ni Rizal ang iba't ibang suliranin
+        tulad ng pang-aabuso ng mga nasa kapangyarihan,
+        katiwalian, kawalan ng katarungan, at problema sa
+        sistema ng edukasyon.
+      </p>
+
+      <p>
+        Ipinapakita rin ng akda kung paano maaaring maapektuhan
+        ang mga mamamayan kapag ang kapangyarihan ay ginagamit
+        para sa pansariling interes sa halip na para sa kapakanan
+        ng bayan.
+      </p>
+
+      <p>
+        Dahil dito, nananatiling mahalaga ang mga kaisipan ng
+        nobela sa pag-unawa sa mga usaping panlipunan at
+        pampolitika.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       MGA ISYU
+  ========================= -->
+
+  <section class="section issues-section" id="issues">
+
+    <h2 class="section-title">
+      ⚖️ Mga Iba't Ibang Isyu
+    </h2>
+
+    <p class="section-description">
+      Narito ang mahahalagang isyung panlipunan na
+      mababasa at masasalamin sa <i>El Filibusterismo</i>.
+    </p>
+
+
+    <div class="issues-container">
+
+
+      <!-- ISYU 1 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          01
+        </div>
+
+        <div class="issue-icon">
+          ⚖️
+        </div>
+
+        <h3>
+          Kawalan ng Katarungan
+        </h3>
+
+        <p>
+          Ipinakita sa nobela ang isang lipunan kung saan
+          hindi pantay ang pagtrato sa mga tao. Ang mga
+          may kapangyarihan ay may mas malaking pagkakataong
+          makaiwas sa pananagutan samantalang ang karaniwang
+          mamamayan ay maaaring maparusahan o maisantabi.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Makikita sa iba't ibang pangyayari sa nobela
+          ang paghihirap ng mga tauhang naghahanap ng
+          katarungan ngunit nahaharap sa makapangyarihang
+          mga institusyon.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ISYU 2 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          02
+        </div>
+
+        <div class="issue-icon">
+          🏛️
+        </div>
+
+        <h3>
+          Pang-aabuso sa Kapangyarihan
+        </h3>
+
+        <p>
+          Isa sa pinakamahalagang isyu sa nobela ang paggamit
+          ng kapangyarihan upang kontrolin o pagsamantalahan
+          ang mga ordinaryong mamamayan.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Ipinakita ang impluwensiya ng ilang prayle at
+          opisyal sa pamahalaan at sa mga desisyong
+          nakaaapekto sa buhay ng mga Pilipino.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ISYU 3 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          03
+        </div>
+
+        <div class="issue-icon">
+          💰
+        </div>
+
+        <h3>
+          Katiwalian at Pansariling Interes
+        </h3>
+
+        <p>
+          Inilalarawan ng nobela ang isang sistemang
+          maaaring maimpluwensiyahan ng pansariling
+          interes, posisyon, at kapangyarihan.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Ang ilang opisyal ay inilalarawan bilang mga
+          taong higit na nag-aalala sa kanilang katayuan
+          kaysa sa kapakanan ng karaniwang mamamayan.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ISYU 4 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          04
+        </div>
+
+        <div class="issue-icon">
+          📚
+        </div>
+
+        <h3>
+          Suliranin sa Edukasyon
+        </h3>
+
+        <p>
+          Ipinakita rin ni Rizal ang mga problema sa sistema
+          ng edukasyon, kabilang ang labis na kontrol,
+          kakulangan ng kalayaan sa pag-iisip, at hindi
+          pantay na oportunidad sa pag-aaral.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Ang mga estudyante tulad nina Isagani at Placido
+          Penitente ay kumakatawan sa mga kabataang
+          nakararanas ng suliranin sa sistema ng edukasyon.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ISYU 5 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          05
+        </div>
+
+        <div class="issue-icon">
+          👥
+        </div>
+
+        <h3>
+          Hindi Pagkakapantay-pantay
+        </h3>
+
+        <p>
+          Ipinapakita sa nobela ang malaking pagkakaiba
+          ng kalagayan ng mga makapangyarihan at ng
+          mga karaniwang Pilipino.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Ang mga taong may mataas na posisyon ay may
+          mas malaking impluwensiya sa lipunan habang
+          ang mahihina ay madalas na walang sapat na
+          boses upang ipaglaban ang kanilang karapatan.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ISYU 6 -->
+
+      <div class="issue-card">
+
+        <div class="issue-number">
+          06
+        </div>
+
+        <div class="issue-icon">
+          ⛪
+        </div>
+
+        <h3>
+          Panghihimasok sa Pamahalaan
+        </h3>
+
+        <p>
+          Tinalakay rin ng nobela ang malakas na impluwensiya
+          ng mga prayle sa mga usaping pampolitika at
+          pampamahalaan.
+        </p>
+
+        <div class="issue-example">
+
+          <strong>Halimbawa:</strong><br>
+
+          Makikita ang pakikialam ng makapangyarihang
+          mga tauhan sa mga desisyon ng pamahalaan,
+          edukasyon, at iba pang bahagi ng lipunan.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         VISUAL CHART
+    ========================= -->
+
+    <div class="chart-box">
+
+      <h3 class="chart-title">
+        📊 Biswal na Tsart ng mga Pangunahing Isyu
+      </h3>
+
+
+      <div class="bar">
+
+        <div class="bar-label">
+
+          <span>
+            Pang-aabuso sa Kapangyarihan
+          </span>
+
+          <span>
+            95%
+          </span>
+
+        </div>
+
+        <div class="bar-background">
+
+          <div class="bar-fill bar1"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bar">
+
+        <div class="bar-label">
+
+          <span>
+            Kawalan ng Katarungan
+          </span>
+
+          <span>
+            90%
+          </span>
+
+        </div>
+
+        <div class="bar-background">
+
+          <div class="bar-fill bar2"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bar">
+
+        <div class="bar-label">
+
+          <span>
+            Katiwalian
+          </span>
+
+          <span>
+            85%
+          </span>
+
+        </div>
+
+        <div class="bar-background">
+
+          <div class="bar-fill bar3"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bar">
+
+        <div class="bar-label">
+
+          <span>
+            Suliranin sa Edukasyon
+          </span>
+
+          <span>
+            80%
+          </span>
+
+        </div>
+
+        <div class="bar-background">
+
+          <div class="bar-fill bar4"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="bar">
+
+        <div class="bar-label">
+
+          <span>
+            Hindi Pagkakapantay-pantay
+          </span>
+
+          <span>
+            75%
+          </span>
+
+        </div>
+
+        <div class="bar-background">
+
+          <div class="bar-fill bar5"></div>
+
+        </div>
+
+      </div>
+
+
+      <p style="
+        text-align:center;
+        margin-top:25px;
+        color:#64748b;
+        line-height:1.6;
+      ">
+
+        *Ang mga porsiyento sa tsart ay
+        <strong>biswal lamang</strong> upang ipakita
+        ang diin ng bawat paksa at hindi estadistikang
+        resulta ng pag-aaral.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       KAHALAGAHAN
+  ========================= -->
+
+  <section class="section">
+
+    <h2 class="section-title">
+      💡 Kahalagahan ng mga Isyu
+    </h2>
+
+    <p class="section-description">
+      Hindi lamang inilalarawan ng nobela ang mga problema;
+      hinihikayat din tayo nitong maging mapanuri sa
+      kalagayan ng lipunan.
+    </p>
+
+
+    <div class="importance">
+
+
+      <div class="importance-card">
+
+        <div class="icon">
+          🧠
+        </div>
+
+        <h3>
+          Maging Mapanuri
+        </h3>
+
+        <p>
+          Mahalaga ang pagsusuri sa mga pangyayari
+          upang makita kung paano nakaaapekto ang
+          kapangyarihan sa lipunan.
+        </p>
+
+      </div>
+
+
+      <div class="importance-card">
+
+        <div class="icon">
+          ⚖️
+        </div>
+
+        <h3>
+          Ipaglaban ang Katarungan
+        </h3>
+
+        <p>
+          Ipinapaalala ng nobela ang kahalagahan
+          ng patas na pagtrato at paggalang sa
+          karapatan ng bawat tao.
+        </p>
+
+      </div>
+
+
+      <div class="importance-card">
+
+        <div class="icon">
+          📚
+        </div>
+
+        <h3>
+          Pahalagahan ang Edukasyon
+        </h3>
+
+        <p>
+          Ang edukasyon ay mahalaga sa pagbuo ng
+          malayang pag-iisip at responsableng
+          mamamayan.
+        </p>
+
+      </div>
+
+
+      <div class="importance-card">
+
+        <div class="icon">
+          🇵🇭
+        </div>
+
+        <h3>
+          Mahalin ang Bayan
+        </h3>
+
+        <p>
+          Ang pag-unawa sa kasaysayan ay tumutulong
+          upang mas mapahalagahan natin ang kalayaan
+          at kapakanan ng bansa.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       SANGGUNIAN
+  ========================= -->
+
+  <section class="section" id="references">
+
+    <h2 class="section-title">
+      📚 Mga Sanggunian
+    </h2>
+
+    <div class="references">
+
+      <h2>
+        Mga Ginamit na Sanggunian
+      </h2>
+
+      <p>
+        Department of Education. (2025–2026).
+        <i>Filipino 10: Learning Activity Sheet —
+        El Filibusterismo.</i>
+        :contentReference[oaicite:0]{index=0}
+      </p>
+
+      <p>
+        Department of Education.
+        <i>Kaligirang Kasaysayan ng El Filibusterismo.</i>
+        Filipino 10 Blended Learning Site.
+        :contentReference[oaicite:1]{index=1}
+      </p>
+
+      <p>
+        LitCharts.
+        <i>Education and Freedom Theme in
+        El Filibusterismo.</i>
+        :contentReference[oaicite:2]{index=2}
+      </p>
+
+      <p>
+        Ang mga pangunahing isyung inilalahad sa pahinang ito
+        ay nakabatay sa mga paksang binibigyang-diin sa mga
+        sanggunian tungkol sa <i>El Filibusterismo</i>,
+        kabilang ang pang-aabuso sa kapangyarihan,
+        edukasyon, katiwalian, at kawalan ng katarungan.
+        :contentReference[oaicite:3]{index=3}
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       REMINDER
+  ========================= -->
+
+  <div class="reminder">
+
+    <h2>
+      💡 Paalala
+    </h2>
+
+    <p>
+      Ang <i>El Filibusterismo</i> ay isang akdang
+      pampanitikan na maaaring gamitin upang suriin
+      ang mga suliraning panlipunan at pampolitika
+      noong panahon ng kolonyalismo. Mahalagang basahin
+      ang buong akda at suriin ang mga pangyayari
+      ayon sa kanilang konteksto.
+    </p>
+
+  </div>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <p>
+      © 2026 PatchBreakers
+    </p>
+
+    <p>
+      📖 Matuto • Magsuri • Mag-isip • Makialam 🇵🇭
+    </p>
+
+  </footer>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    const hamburger =
+      document.getElementById("hamburger");
+
+    const navMenu =
+      document.getElementById("navMenu");
+
+
+    hamburger.addEventListener(
+      "click",
+      function () {
+
+        navMenu.classList.toggle("show");
+
+      }
+    );
+
+
+    // Close mobile menu after clicking a link
+
+    const navLinks =
+      document.querySelectorAll(".nav-link");
+
+    navLinks.forEach(function(link) {
+
+      link.addEventListener("click", function() {
+
+        if (
+          window.innerWidth <= 768
+        ) {
+
+          navMenu.classList.remove("show");
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+
+</body>
+</html>

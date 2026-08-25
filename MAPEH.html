@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PatchBreakers | Business Portfolio</title>
+
+  <style>
+
+    /* ================= GENERAL ================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+      width: 100%;
+      min-height: 70px;
+
+      padding: 0 7%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: #111827;
+
+      position: sticky;
+      top: 0;
+
+      z-index: 1000;
+
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+
+    .logo {
+      color: #60a5fa;
+
+      text-decoration: none;
+
+      font-size: 1.6rem;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      transition: 0.3s ease;
+    }
+
+
+    .logo:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+
+    .nav-menu {
+      list-style: none;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+
+    .nav-item {
+      position: relative;
+    }
+
+
+    .nav-link {
+      display: block;
+
+      padding: 24px 15px;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
+      transition: 0.3s ease;
+    }
+
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #60a5fa;
+    }
+
+
+    .arrow {
+      font-size: 0.7rem;
+
+      margin-left: 4px;
+
+      display: inline-block;
+
+      transition: 0.3s ease;
+    }
+
+
+    .has-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+
+    /* ================= DROPDOWN ================= */
+
+    .dropdown {
+      position: absolute;
+
+      top: calc(100% + 8px);
+      left: 0;
+
+      min-width: 210px;
+
+      background: #1f2937;
+
+      list-style: none;
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform: translateY(-15px) scale(0.95);
+
+      transform-origin: top center;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.3);
+
+      z-index: 1100;
+    }
+
+
+    .dropdown li {
+      opacity: 0;
+
+      transform: translateX(-15px);
+    }
+
+
+    .has-dropdown:hover .dropdown {
+      opacity: 1;
+
+      visibility: visible;
+
+      transform: translateY(0) scale(1);
+    }
+
+
+    .has-dropdown:hover .dropdown li {
+      animation: dropdownItem 0.35s ease forwards;
+    }
+
+
+    .has-dropdown:hover .dropdown li:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(2) {
+      animation-delay: 0.10s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(4) {
+      animation-delay: 0.20s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+
+    @keyframes dropdownItem {
+
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+    }
+
+
+    .dropdown li a {
+      display: block;
+
+      padding: 13px 18px;
+
+      color: white;
+
+      text-decoration: none;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        padding-left 0.25s ease;
+    }
+
+
+    .dropdown li a:hover {
+      background: #374151;
+
+      color: #60a5fa;
+
+      padding-left: 27px;
+    }
+
+
+    /* ================= HAMBURGER ================= */
+
+    .hamburger {
+      display: none;
+
+      cursor: pointer;
+    }
+
+
+    .hamburger span {
+      display: block;
+
+      width: 28px;
+
+      height: 3px;
+
+      margin: 5px;
+
+      background: white;
+
+      border-radius: 5px;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 470px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 70px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          #2563eb,
+          transparent 35%
+        ),
+
+        linear-gradient(
+          135deg,
+          #111827,
+          #243b55
+        );
+
+      overflow: hidden;
+    }
+
+
+    .hero-content {
+      max-width: 850px;
+
+      animation: heroAppear 1s ease;
+    }
+
+
+    @keyframes heroAppear {
+
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    .hero-label {
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      color: #60a5fa;
+
+      font-size: 0.9rem;
+
+      font-weight: 800;
+
+      letter-spacing: 4px;
+    }
+
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+
+      margin-bottom: 20px;
+    }
+
+
+    .hero h1 span {
+      color: #60a5fa;
+    }
+
+
+    .hero p {
+      color: #dbeafe;
+
+      font-size: 1.15rem;
+
+      max-width: 750px;
+
+      margin: auto;
+
+      line-height: 1.8;
+    }
+
+
+    .hero-button {
+      display: inline-block;
+
+      margin-top: 30px;
+
+      padding: 14px 30px;
+
+      background: #60a5fa;
+
+      color: #111827;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      border-radius: 30px;
+
+      transition: 0.3s ease;
+    }
+
+
+    .hero-button:hover {
+      background: white;
+
+      transform:
+        translateY(-5px)
+        scale(1.05);
+    }
+
+
+    /* ================= BUSINESS SECTION ================= */
+
+    .business-section {
+      width: 90%;
+
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 80px 0;
+    }
+
+
+    .section-title {
+      text-align: center;
+
+      margin-bottom: 50px;
+    }
+
+
+    .section-title h2 {
+      font-size: 2.8rem;
+
+      color: #111827;
+
+      margin-bottom: 10px;
+    }
+
+
+    .section-title p {
+      color: #64748b;
+
+      font-size: 1.05rem;
+    }
+
+
+    /* ================= BUSINESS CARD ================= */
+
+    .card {
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 40px;
+
+      margin-bottom: 45px;
+
+      border: 1px solid #e5e7eb;
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.08);
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+      animation: cardAppear 0.8s ease;
+    }
+
+
+    .card:hover {
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.14);
+    }
+
+
+    @keyframes cardAppear {
+
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* ================= BUSINESS HEADER ================= */
+
+    .business-header {
+      display: flex;
+
+      align-items: center;
+
+      gap: 20px;
+
+      margin-bottom: 30px;
+
+      padding-bottom: 20px;
+
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+
+    .business-number {
+      min-width: 65px;
+
+      width: 65px;
+
+      height: 65px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #eff6ff;
+
+      color: #2563eb;
+
+      font-size: 1.3rem;
+
+      font-weight: 800;
+    }
+
+
+    .business-header h2 {
+      font-size: 2rem;
+
+      color: #111827;
+    }
+
+
+    .business-header span {
+      color: #3b82f6;
+
+      font-size: 0.9rem;
+
+      font-weight: 700;
+    }
+
+
+    /* ================= AINO IMAGE ================= */
+
+    .aino-image-container {
+      width: 100%;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      margin: 10px 0 35px;
+    }
+
+
+    .aino-image {
+      width: 260px;
+
+      height: 260px;
+
+      object-fit: contain;
+
+      border-radius: 20px;
+
+      background: #f8fafc;
+
+      padding: 10px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+
+    .aino-image:hover {
+      transform:
+        scale(1.05)
+        rotate(2deg);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.18);
+    }
+
+
+    /* ================= CARD CONTENT ================= */
+
+    .card h3 {
+      color: #1e40af;
+
+      margin-top: 25px;
+
+      margin-bottom: 8px;
+
+      font-size: 1.1rem;
+    }
+
+
+    .card p {
+      color: #4b5563;
+
+      line-height: 1.8;
+    }
+
+
+    .card ul {
+      padding-left: 25px;
+
+      color: #4b5563;
+    }
+
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+
+    /* ================= TEAM ================= */
+
+    .team {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 12px;
+    }
+
+
+    .member {
+      padding: 9px 15px;
+
+      border-radius: 20px;
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      font-size: 0.9rem;
+
+      font-weight: 600;
+
+      transition: 0.3s ease;
+    }
+
+
+    .member:hover {
+      background: #2563eb;
+
+      color: white;
+
+      transform: translateY(-3px);
+    }
+
+
+    /* ================= INFO BOX ================= */
+
+    .info-box {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 20px;
+
+      margin-top: 30px;
+    }
+
+
+    .info {
+      padding: 20px;
+
+      background: #f8fafc;
+
+      border-radius: 12px;
+
+      border-left: 4px solid #3b82f6;
+    }
+
+
+    .info strong {
+      display: block;
+
+      color: #1e3a8a;
+
+      margin-bottom: 5px;
+    }
+
+
+    /* ================= CONTACT ================= */
+
+    .contact {
+      padding: 75px 20px;
+
+      text-align: center;
+
+      background: #111827;
+
+      color: white;
+    }
+
+
+    .contact h2 {
+      font-size: 2.4rem;
+
+      margin-bottom: 10px;
+    }
+
+
+    .contact p {
+      color: #cbd5e1;
+
+      margin-bottom: 10px;
+    }
+
+
+    .contact .copyright {
+      margin-top: 20px;
+
+      font-size: 0.9rem;
+
+      color: #94a3b8;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+
+      .navbar {
+        padding: 0 5%;
+      }
+
+
+      .hamburger {
+        display: block;
+      }
+
+
+      .nav-menu {
+        position: absolute;
+
+        top: 70px;
+
+        left: 0;
+
+        width: 100%;
+
+        background: #111827;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        display: none;
+
+        padding: 10px 0;
+      }
+
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+
+      .nav-link {
+        padding: 15px 25px;
+      }
+
+
+      .dropdown {
+        position: static;
+
+        width: 100%;
+
+        display: none;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+        border-radius: 0;
+
+        box-shadow: none;
+      }
+
+
+      .dropdown li {
+        opacity: 1;
+
+        transform: none;
+
+        animation: none !important;
+      }
+
+
+      .dropdown-active .dropdown {
+        display: block;
+      }
+
+
+      .has-dropdown:hover .dropdown {
+        display: none;
+      }
+
+
+      .dropdown-active:hover .dropdown {
+        display: block;
+      }
+
+
+      .hero {
+        min-height: 430px;
+      }
+
+
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+
+      .business-section {
+        width: 92%;
+
+        padding: 60px 0;
+      }
+
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+
+
+      .card {
+        padding: 25px 20px;
+      }
+
+
+      .business-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+
+      .business-header h2 {
+        font-size: 1.7rem;
+      }
+
+
+      .info-box {
+        grid-template-columns: 1fr;
+      }
+
+
+      .aino-image {
+        width: 220px;
+
+        height: 220px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <a href="index.html" class="logo">
+      PatchBreakers
+    </a>
+
+
+    <div class="hamburger" id="hamburger">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+
+    <ul class="nav-menu" id="navMenu">
+
+
+      <!-- HOME -->
+
+      <li class="nav-item">
+
+        <a href="index.html"
+           class="nav-link active">
+
+          Home
+
+        </a>
+
+      </li>
+
+
+      <!-- ABOUT -->
+
+      <li class="nav-item">
+
+        <a href="#about"
+           class="nav-link">
+
+          About
+
+        </a>
+
+      </li>
+
+
+      <!-- SUBJECTS -->
+
+      <li class="nav-item has-dropdown">
+
+        <a href="#"
+           class="nav-link">
+
+          Subjects
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </a>
+
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="aralpan.html">
+              🌏 Aral.pan
+            </a>
+          </li>
+
+          <li>
+            <a href="filipino.html">
+              📚 Filipino
+            </a>
+          </li>
+
+          <li>
+            <a href="MAPEH.html">
+              🎨 MAPEH
+            </a>
+          </li>
+
+          <li>
+            <a href="robotics.html">
+              🤖 Robotics
+            </a>
+          </li>
+
+          <li>
+            <a href="science.html">
+              🔬 Science
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+      <!-- PORTFOLIO -->
+
+      <li class="nav-item has-dropdown">
+
+        <a href="#"
+           class="nav-link">
+
+          Portfolio
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </a>
+
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="#big-shaks">
+              🍔 Big Shaks
+            </a>
+          </li>
+
+          <li>
+            <a href="#aino">
+              🎮 Aino Corporation
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+      <!-- CONTACT -->
+
+      <li class="nav-item">
+
+        <a href="#contact"
+           class="nav-link">
+
+          Contact
+
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <span class="hero-label">
+        BUSINESS PORTFOLIO
+      </span>
+
+
+      <h1>
+        Welcome to
+        <span>PatchBreakers!</span>
+      </h1>
+
+
+      <p>
+        Creative ideas transformed into memorable
+        food experiences and interactive digital
+        entertainment.
+      </p>
+
+
+      <a href="#about"
+         class="hero-button">
+
+        Explore Our Businesses 🚀
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= BUSINESS SECTION ================= -->
+
+  <main class="business-section"
+        id="about">
+
+
+    <div class="section-title">
+
+      <h2>
+        Our Businesses
+      </h2>
+
+
+      <p>
+        Explore the creative businesses
+        developed by PatchBreakers.
+      </p>
+
+    </div>
+
+
+
+    <!-- ================= BIG SHAKS ================= -->
+
+    <div class="card"
+         id="big-shaks">
+
+
+      <div class="business-header">
+
+        <div class="business-number">
+          01
+        </div>
+
+
+        <div>
+
+          <h2>
+            Big Shaks
+          </h2>
+
+          <span>
+            Creative Food Experience Brand
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <h3>
+        👥 Team Members
+      </h3>
+
+
+      <div class="team">
+
+        <span class="member">
+          Justin S. Basea
+        </span>
+
+        <span class="member">
+          Ezylryb V. Meñez
+        </span>
+
+        <span class="member">
+          Matthew Exequiel Javelona
+        </span>
+
+        <span class="member">
+          Lance Eliezer D. Santillan
+        </span>
+
+      </div>
+
+
+
+      <h3>
+        🏷️ Business Name
+      </h3>
+
+
+      <p>
+        <strong>
+          Big Shaks
+        </strong>
+      </p>
+
+
+
+      <h3>
+        🍔 Product / Service Description
+      </h3>
+
+
+      <p>
+        A creative food experience brand that crafts
+        oversized, visually striking burgers and shakes
+        designed as edible art. We blend culinary
+        creativity with bold presentation and storytelling,
+        turning every meal into a shareable, memorable
+        content piece.
+      </p>
+
+
+      <p style="margin-top: 12px;">
+
+        Our creations are crafted to inspire food
+        photography, social media engagement, and
+        community conversation — turning food into
+        a form of creative expression.
+
+      </p>
+
+
+
+      <h3>
+        🎯 Target Market
+      </h3>
+
+
+      <p>
+        Content creators, food influencers, social media
+        users, and anyone who values unique, visually
+        appealing food experiences.
+      </p>
+
+
+
+      <h3>
+        🧰 Materials / Resources Needed
+      </h3>
+
+
+      <ul>
+
+        <li>
+          Fresh ingredients and recipe development
+        </li>
+
+        <li>
+          Creative plating and presentation tools
+        </li>
+
+        <li>
+          Photography and videography equipment
+        </li>
+
+        <li>
+          Social media platforms for content sharing
+        </li>
+
+        <li>
+          Branding and design materials
+        </li>
+
+      </ul>
+
+
+      <div class="info-box">
+
+        <div class="info">
+
+          <strong>
+            Business Focus
+          </strong>
+
+          Creative food and memorable
+          customer experiences.
+
+        </div>
+
+
+        <div class="info">
+
+          <strong>
+            Main Goal
+          </strong>
+
+          Turn food into creative,
+          shareable experiences.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= AINO CORPORATION ================= -->
+
+    <div class="card"
+         id="aino">
+
+
+      <div class="business-header">
+
+        <div class="business-number">
+          02
+        </div>
+
+
+        <div>
+
+          <h2>
+            Aino Corporation Inc.
+          </h2>
+
+          <span>
+            Interactive Digital Media & Storytelling
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- AINO IMAGE -->
+
+      <div class="aino-image-container">
+
+        <img
+          src="ainocorp.jpg"
+          class="aino-image">
+
+      </div>
+
+
+
+      <h3>
+        👥 Team Members
+      </h3>
+
+
+      <div class="team">
+
+        <span class="member">
+          Mattheiu Addy B. Cortejo
+        </span>
+
+        <span class="member">
+          Sofia C. Oroceo
+        </span>
+
+        <span class="member">
+          Koleen Rei M. Escalante
+        </span>
+
+        <span class="member">
+          Eva Marie A. Doblar
+        </span>
+
+      </div>
+
+
+
+      <h3>
+        🏷️ Business Name
+      </h3>
+
+
+      <p>
+        <strong>
+          Aino Corporation Inc.
+        </strong>
+      </p>
+
+
+
+      <h3>
+        🎮 Product / Service Description
+      </h3>
+
+
+      <p>
+        An interactive digital media and storytelling
+        studio that creates original role-playing game
+        (RPG) experiences and character-driven content.
+      </p>
+
+
+      <p style="margin-top: 12px;">
+
+        We design immersive worlds, original characters,
+        and narrative journeys that users can explore,
+        blending art, coding, and storytelling to produce
+        unique digital entertainment.
+
+      </p>
+
+
+      <p style="margin-top: 12px;">
+
+        Our work transforms creative ideas into playable,
+        shareable experiences that connect communities.
+
+      </p>
+
+
+
+      <h3>
+        🎯 Target Market
+      </h3>
+
+
+      <p>
+        Visual novel fans, gamers, art enthusiasts,
+        tech companies, and digital content platforms.
+      </p>
+
+
+
+      <h3>
+        🧰 Materials / Resources Needed
+      </h3>
+
+
+      <ul>
+
+        <li>
+          Art and coding software
+          (game engines, Aseprite, etc.)a
+        </li>
+
+        <li>
+          Digital drawing tools and equipment
+        </li>
+
+        <li>
+          Programming and game development skills
+        </li>
+
+        <li>
+          Storywriting and character design resources
+        </li>
+
+        <li>
+          Digital distribution platforms
+        </li>
+
+      </ul>
+
+
+      <div class="info-box">
+
+        <div class="info">
+
+          <strong>
+            Business Focus
+          </strong>
+
+          Digital entertainment,
+          storytelling, and game development.
+
+        </div>
+
+
+        <div class="info">
+
+          <strong>
+            Main Goal
+          </strong>
+
+          Transform creative ideas into
+          interactive digital experiences.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- ================= CONTACT ================= -->
+
+  <section class="contact"
+           id="contact">
+
+    <h2>
+      PatchBreakers
+    </h2>
+
+
+    <p>
+      Creative ideas. Bold experiences.
+      Digital worlds.
+    </p>
+
+
+    <p class="copyright">
+      © 2026 PatchBreakers | Learn • Create • Innovate 🚀
+    </p>
+
+  </section>
+
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    const hamburger =
+      document.getElementById("hamburger");
+
+    const navMenu =
+      document.getElementById("navMenu");
+
+
+    hamburger.addEventListener(
+      "click",
+      function () {
+
+        navMenu.classList.toggle("active");
+
+      }
+    );
+
+
+    /* Mobile dropdown */
+
+    const dropdownToggles =
+      document.querySelectorAll(".has-dropdown > .nav-link");
+
+
+    dropdownToggles.forEach(function(toggle) {
+
+      toggle.addEventListener("click", function(event) {
+
+        if (window.innerWidth <= 768) {
+
+          event.preventDefault();
+
+          const parent =
+            toggle.parentElement;
+
+          parent.classList.toggle("dropdown-active");
+
+        }
+
+      });
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatchBreakers | Interactive Portfolio</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+      width: 100%;
+      height: 75px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111827;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #00d9ff;
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .logo:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00d9ff, #0077ff);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.45);
+      transition: 0.3s ease;
+    }
+
+    .logo:hover .logo-icon {
+      transform: rotate(-8deg);
+      box-shadow: 0 0 28px rgba(0, 217, 255, 0.7);
+    }
+
+    .logo-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      color: #00d9ff;
+      letter-spacing: 0.5px;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 5px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background: #00a8cc;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       DROPDOWN
+    ========================= */
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      width: 210px;
+      padding: 8px 0;
+      list-style: none;
+      background: #1e293b;
+      border-radius: 12px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform:
+        translateY(-15px)
+        scale(0.95);
+
+      transform-origin: top center;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+
+      z-index: 1100;
+    }
+
+    .has-dropdown:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+    .dropdown li {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+
+    .has-dropdown:hover .dropdown li {
+      animation:
+        dropdownItem 0.35s ease forwards;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(2) {
+      animation-delay: 0.10s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(4) {
+      animation-delay: 0.20s;
+    }
+
+    .has-dropdown:hover .dropdown li:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    @keyframes dropdownItem {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 13px 18px;
+      color: white;
+      text-decoration: none;
+
+      transition:
+        background 0.25s ease,
+        padding-left 0.25s ease;
+    }
+
+    .dropdown li a:hover {
+      background: #00a8cc;
+      padding-left: 27px;
+    }
+
+    .arrow {
+      font-size: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .has-dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* =========================
+       HAMBURGER
+    ========================= */
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      margin: 5px;
+      background: white;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .intro {
+      min-height: 600px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 80px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at top right,
+          #00a8cc,
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #111827,
+          #243b55
+        );
+
+      overflow: hidden;
+    }
+
+    .intro-content {
+      max-width: 900px;
+      animation: heroAppear 1s ease;
+    }
+
+    @keyframes heroAppear {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro h1 {
+      font-size: 55px;
+      margin-bottom: 25px;
+    }
+
+    .intro h1 span {
+      color: #00d9ff;
+    }
+
+    .intro p {
+      font-size: 19px;
+      line-height: 1.8;
+      margin-bottom: 12px;
+      color: #e5e7eb;
+    }
+
+    .intro-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 15px 32px;
+
+      background: #00d9ff;
+      color: #111827;
+
+      text-decoration: none;
+      font-weight: bold;
+
+      border-radius: 30px;
+
+      transition: 0.3s ease;
+
+      box-shadow:
+        0 5px 20px rgba(0, 217, 255, 0.3);
+    }
+
+    .intro-button:hover {
+      transform:
+        translateY(-5px)
+        scale(1.05);
+
+      background: white;
+    }
+
+    /* =========================
+       GENERAL SECTION
+    ========================= */
+
+    .section {
+      padding: 80px 7%;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 38px;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+
+    .section-description {
+      color: #64748b;
+      margin-bottom: 45px;
+      font-size: 17px;
+    }
+
+    /* =========================
+       MEMBERS
+    ========================= */
+
+    .members-container {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(190px, 1fr));
+
+      gap: 22px;
+    }
+
+    .member-card {
+      background: white;
+
+      padding: 30px 15px;
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.1);
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .member-card:hover {
+      transform:
+        translateY(-12px)
+        rotate(1deg);
+
+      box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .member-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+
+      transition:
+        transform 0.3s ease;
+    }
+
+    .member-card:hover .member-icon {
+      transform:
+        scale(1.15)
+        rotate(5deg);
+    }
+
+    .member-card h3 {
+      font-size: 17px;
+      color: #111827;
+    }
+
+    .member-card p {
+      margin-top: 8px;
+      color: #64748b;
+    }
+
+    /* =========================
+       SUBJECTS
+    ========================= */
+
+    .subjects-section {
+      background: #eef6ff;
+    }
+
+    .subjects-container {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(270px, 1fr));
+
+      gap: 25px;
+    }
+
+    .subject-card {
+      position: relative;
+
+      background: white;
+
+      padding: 30px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.1);
+
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .subject-card:hover {
+      transform:
+        translateY(-10px)
+        scale(1.02);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .subject-icon {
+      font-size: 58px;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .subject-card:hover .subject-icon {
+      transform:
+        rotate(8deg)
+        scale(1.15);
+    }
+
+    .subject-card h3 {
+      font-size: 25px;
+
+      margin:
+        15px 0 8px;
+
+      color: #111827;
+    }
+
+    .subject-card p {
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .score {
+      color: #00a8cc;
+
+      font-size: 20px;
+      font-weight: bold;
+
+      margin: 10px 0;
+    }
+
+    .subject-card button {
+      border: none;
+
+      margin-top: 20px;
+
+      padding: 12px 25px;
+
+      border-radius: 25px;
+
+      background: #243b55;
+      color: white;
+
+      cursor: pointer;
+
+      font-size: 15px;
+
+      transition: 0.3s ease;
+    }
+
+    .subject-card button:hover {
+      background: #00a8cc;
+
+      transform:
+        translateY(-3px)
+        scale(1.05);
+    }
+
+    .subject-info {
+      display: none;
+
+      margin-top: 20px;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      background: #eef6ff;
+
+      text-align: left;
+
+      animation:
+        infoAppear 0.4s ease;
+    }
+
+    @keyframes infoAppear {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .subject-info h4 {
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .subject-info ol {
+      padding-left: 25px;
+      line-height: 1.9;
+    }
+
+    /* =========================
+       FUN SECTION
+    ========================= */
+
+    .fun-section {
+      padding: 90px 20px;
+
+      text-align: center;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #111827,
+          #243b55
+        );
+    }
+
+    .fun-section h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .fun-section p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    .fun-button {
+      border: none;
+
+      margin-top: 25px;
+
+      padding: 15px 32px;
+
+      border-radius: 30px;
+
+      background: #00d9ff;
+      color: #111827;
+
+      font-size: 17px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.3s ease;
+    }
+
+    .fun-button:hover {
+      transform:
+        scale(1.08)
+        translateY(-3px);
+
+      background: white;
+    }
+
+    #adventure-message {
+      margin-top: 20px;
+
+      color: #00d9ff;
+
+      font-weight: bold;
+    }
+
+    /* =========================
+       SAFETY
+    ========================= */
+
+    .safety {
+      max-width: 900px;
+
+      margin: 50px auto;
+
+      padding: 25px;
+
+      background: #fff3cd;
+
+      border-left:
+        6px solid #ffc107;
+
+      border-radius: 12px;
+
+      text-align: left;
+
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .safety h2 {
+      color: #856404;
+      margin-bottom: 10px;
+    }
+
+    .safety p {
+      color: #5f5200;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 30px;
+
+      text-align: center;
+
+      background: #0b1120;
+
+      color: white;
+
+      line-height: 1.8;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .navbar {
+        height: 70px;
+        padding: 0 5%;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 15px 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        background: #111827;
+
+        box-shadow:
+          0 10px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .nav-menu.show {
+        display: flex;
+
+        animation:
+          mobileMenu 0.3s ease;
+      }
+
+      @keyframes mobileMenu {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .nav-item {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-link {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .dropdown {
+        position: static;
+
+        width: 90%;
+
+        margin: 5px auto;
+
+        display: none;
+
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+
+        box-shadow: none;
+      }
+
+      .has-dropdown:hover .dropdown {
+        display: block;
+      }
+
+      .dropdown li {
+        opacity: 1;
+        transform: none;
+
+        animation:
+          none !important;
+      }
+
+      .intro {
+        min-height: 550px;
+      }
+
+      .intro h1 {
+        font-size: 38px;
+      }
+
+      .intro p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .fun-section h2 {
+        font-size: 30px;
+      }
+
+      .safety {
+        margin: 30px 20px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================= -->
+
+  <nav class="navbar">
+
+    <!-- PATCHBREAKERS LOGO -->
+
+    <a href="index.html" class="logo">
+
+      <span class="logo-icon">
+
+        <svg
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          <!-- Outer circle -->
+
+          <circle
+            cx="50"
+            cy="50"
+            r="44"
+            fill="#111827"
+            stroke="white"
+            stroke-width="4"
+          />
+
+          <!-- Circuit pattern -->
+
+          <path
+            d="M28 50
+               L40 50
+               L40 35
+               L60 35
+               L60 50
+               L72 50"
+            fill="none"
+            stroke="#00d9ff"
+            stroke-width="7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <path
+            d="M40 65
+               L60 65
+               L60 50"
+            fill="none"
+            stroke="#00d9ff"
+            stroke-width="7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <!-- Circuit dots -->
+
+          <circle
+            cx="28"
+            cy="50"
+            r="5"
+            fill="#00d9ff"
+          />
+
+          <circle
+            cx="72"
+            cy="50"
+            r="5"
+            fill="#00d9ff"
+          />
+
+          <circle
+            cx="40"
+            cy="65"
+            r="5"
+            fill="#00d9ff"
+          />
+
+          <circle
+            cx="60"
+            cy="35"
+            r="5"
+            fill="#00d9ff"
+          />
+
+        </svg>
+
+      </span>
+
+      <span class="logo-text">
+        PatchBreakers
+      </span>
+
+    </a>
+
+
+    <!-- HAMBURGER -->
+
+    <div
+      class="hamburger"
+      id="hamburger"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <ul
+      class="nav-menu"
+      id="navMenu"
+    >
+
+      <li class="nav-item">
+
+        <a
+          href="#"
+          class="nav-link active"
+        >
+          Home
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          href="#members"
+          class="nav-link"
+        >
+          About
+        </a>
+
+      </li>
+
+
+      <!-- SUBJECT DROPDOWN -->
+
+      <li class="nav-item has-dropdown">
+
+        <a
+          href="#subjects"
+          class="nav-link"
+        >
+
+          Subjects
+
+          <span class="arrow">
+            ▼
+          </span>
+
+        </a>
+
+
+        <ul class="dropdown">
+
+          <li>
+            <a href="aralpan.html">
+              🌏 Aral.pan & Val. Ed.
+            </a>
+          </li>
+
+          <li>
+            <a href="filipino.html">
+              📚 Filipino
+            </a>
+          </li>
+
+          <li>
+            <a href="MAPEH.html">
+              🎨 MAPEH
+            </a>
+          </li>
+
+          <li>
+            <a href="robotics.html">
+              🤖 Robotics
+            </a>
+          </li>
+
+          <li>
+            <a href="science.html">
+              🔬 Science
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          href="#contact"
+          class="nav-link"
+        >
+          Contact
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="intro">
+
+    <div class="intro-content">
+
+      <h1>
+
+        Welcome to
+
+        <span>
+          PatchBreakers!
+        </span>
+
+        🚀
+
+      </h1>
+
+
+      <p>
+
+        We are PatchBreakers — a team of creative,
+        curious, and hardworking students.
+
+      </p>
+
+
+      <p>
+
+        Explore our interactive portfolio and discover
+        what we have learned in Robotics, Araling
+        Panlipunan, Filipino, MAPEH, and Science.
+
+      </p>
+
+
+      <a
+        href="#members"
+        class="intro-button"
+      >
+
+        Meet the Team 👥
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MEMBERS
+  ========================= -->
+
+  <section
+    class="section"
+    id="members"
+  >
+
+    <h2 class="section-title">
+      👥 Meet the PatchBreakers
+    </h2>
+
+
+    <p class="section-description">
+
+      Eight members. One team. One goal — learn and create!
+
+    </p>
+
+
+    <div class="members-container">
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          👨‍💻
+        </div>
+
+        <h3>
+          Justin S. Basea
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          🤖
+        </div>
+
+        <h3>
+          Mattheiu Addy B. Cortejo
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          👩‍🎨
+        </div>
+
+        <h3>
+          Eva Marie A. Doblar
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          📚
+        </div>
+
+        <h3>
+          Koleen Rei M. Escalante
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          🔬
+        </div>
+
+        <h3>
+          Matthew Exequiel Javelona
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          ⚡
+        </div>
+
+        <h3>
+          Ezylryb V. Menez
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          🎯
+        </div>
+
+        <h3>
+          Lance Eliezer D. Santillan
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+
+      <div class="member-card">
+
+        <div class="member-icon">
+          🌟
+        </div>
+
+        <h3>
+          Sofia C. Oroceo
+        </h3>
+
+        <p>
+          Member
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SUBJECTS
+  ========================= -->
+
+  <section
+    class="section subjects-section"
+    id="subjects"
+  >
+
+    <h2 class="section-title">
+      🎮 Explore Our Subjects
+    </h2>
+
+
+    <p class="section-description">
+
+      Click a subject to reveal more information!
+
+    </p>
+
+
+    <div class="subjects-container">
+
+
+      <!-- ROBOTICS -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon">
+          🤖
+        </div>
+
+        <h3>
+          Robotics
+        </h3>
+
+        <p>
+
+          Explore robots, programming, electronics,
+          automation, and technology.
+
+        </p>
+
+
+        <button
+          onclick="showInfo('robotics-info')"
+        >
+
+          Explore 🤖
+
+        </button>
+
+
+        <div
+          class="subject-info"
+          id="robotics-info"
+        >
+
+          <p>
+
+            Robotics combines engineering,
+            programming, electronics, and
+            problem-solving to create machines
+            that can perform useful tasks.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ARALING PANLIPUNAN -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon">
+          🌏
+        </div>
+
+        <h3>
+          Araling Panlipunan/Values Education
+        </h3>
+
+        <div class="score">
+          10 ⭐
+        </div>
+
+        <p>
+
+          Learn about history, geography,
+          culture, government, and society.
+
+        </p>
+
+
+        <button
+          onclick="showInfo('aralpan-info')"
+        >
+
+          Explore 🌍
+
+        </button>
+
+
+        <div
+          class="subject-info"
+          id="aralpan-info"
+        >
+
+          <p>
+
+            Araling Panlipunan helps us understand
+            Philippine history, culture, society,
+            government, and geography.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- FILIPINO -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon">
+          📚
+        </div>
+
+        <h3>
+          Filipino
+        </h3>
+
+        <div class="score">
+          10 ⭐
+        </div>
+
+        <p>
+
+          Explore Filipino language, literature,
+          culture, and communication.
+
+        </p>
+
+
+        <button
+          onclick="showInfo('filipino-info')"
+        >
+
+          Explore 📚
+
+        </button>
+
+
+        <div
+          class="subject-info"
+          id="filipino-info"
+        >
+
+          <p>
+
+            Filipino helps us appreciate our
+            language, literature, culture,
+            traditions, and identity.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- MAPEH -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon">
+          🎨
+        </div>
+
+        <h3>
+          MAPEH/English
+        </h3>
+
+        <div class="score">
+          10 ⭐
+        </div>
+
+        <p>
+
+          Discover Music, Arts, Physical Education,
+          and Health through nine learning domains.
+
+        </p>
+
+
+        <button
+          onclick="showInfo('mapeh-info')"
+        >
+
+          Explore 🎵
+
+        </button>
+
+
+        <div
+          class="subject-info"
+          id="mapeh-info"
+        >
+
+          <h4>
+            The 9 Domains
+          </h4>
+
+          <ol>
+
+            <li>Music</li>
+            <li>Visual Arts</li>
+            <li>Dance</li>
+            <li>Theater</li>
+            <li>Physical Fitness</li>
+            <li>Health</li>
+            <li>Sports</li>
+            <li>Creative Expression</li>
+            <li>Personal Wellness</li>
+
+          </ol>
+
+        </div>
+
+      </div>
+
+
+      <!-- SCIENCE -->
+
+      <div class="subject-card">
+
+        <div class="subject-icon">
+          🔬
+        </div>
+
+        <h3>
+          Science
+        </h3>
+
+        <div class="score">
+          10 ⭐
+        </div>
+
+        <p>
+
+          Discover life, matter, energy, Earth,
+          space, technology, and scientific discoveries.
+
+        </p>
+
+
+        <button
+          onclick="showInfo('science-info')"
+        >
+
+          Explore 🔬
+
+        </button>
+
+
+        <div
+          class="subject-info"
+          id="science-info"
+        >
+
+          <p>
+
+            Science helps us understand the natural
+            world through observation, experimentation,
+            evidence, and discovery.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FUN SECTION
+  ========================= -->
+
+  <section class="fun-section">
+
+    <h2>
+      ✨ Ready to Explore?
+    </h2>
+
+
+    <p>
+
+      Learning doesn't have to be boring!
+      Explore our subjects, meet our team,
+      and discover what PatchBreakers has created.
+
+    </p>
+
+
+    <button
+      class="fun-button"
+      onclick="startAdventure()"
+    >
+
+      🚀 Start Exploring
+
+    </button>
+
+
+    <p id="adventure-message"></p>
+
+  </section>
+
+
+  <!-- =========================
+       SAFETY
+  ========================= -->
+
+  <div class="safety">
+
+    <h2>
+      ⚠️ Safety Reminder
+    </h2>
+
+
+    <p>
+
+      Always prioritize safety when working with electronics.
+      Use the correct equipment, follow instructions, and ask
+      the teacher or person in charge for assistance when
+      you are unsure about a task.
+
+    </p>
+
+  </div>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer id="contact">
+
+    <p>
+      © 2026 PatchBreakers
+    </p>
+
+    <p>
+      🤖 Learn • Explore • Create • Innovate 🚀
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       SUBJECT INFORMATION
+    ========================= */
+
+    function showInfo(id) {
+
+      const info =
+        document.getElementById(id);
+
+      if (info.style.display === "block") {
+
+        info.style.display = "none";
+
+      } else {
+
+        info.style.display = "block";
+
+      }
+
+    }
+
+
+    /* =========================
+       START ADVENTURE
+    ========================= */
+
+    function startAdventure() {
+
+      const message =
+        document.getElementById(
+          "adventure-message"
+        );
+
+      message.innerHTML =
+        "🎉 Welcome, Explorer! Choose a subject above and start learning with PatchBreakers! 🚀";
+
+    }
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const hamburger =
+      document.getElementById(
+        "hamburger"
+      );
+
+    const navMenu =
+      document.getElementById(
+        "navMenu"
+      );
+
+
+    hamburger.addEventListener(
+      "click",
+      function () {
+
+        navMenu.classList.toggle(
+          "show"
+        );
+
+      }
+    );
+
+
+    /* =========================
+       CLOSE MOBILE MENU
+       AFTER CLICKING A LINK
+    ========================= */
+
+    const navLinks =
+      document.querySelectorAll(
+        ".nav-link"
+      );
+
+
+    navLinks.forEach(function(link) {
+
+      link.addEventListener(
+        "click",
+        function() {
+
+          navMenu.classList.remove(
+            "show"
+          );
+
+        }
+      );
+
+    });
+
+  </script>
+
+</body>
+
+</html>
