@@ -820,6 +820,23 @@
       }
     }
 
+  
+    /* CENTER THE LAST TWO SUBJECT CARDS */
+    @media (min-width: 769px) {
+      .subjects-container {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+      .subject-card {
+        grid-column: span 2;
+      }
+      .subject-card:nth-child(4) {
+        grid-column: 2 / span 2;
+      }
+      .subject-card:nth-child(5) {
+        grid-column: 4 / span 2;
+      }
+    }
+
   </style>
 </head>
 
